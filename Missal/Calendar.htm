@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Page</title>
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="jquery.mobile-1.4.5.min.css" />
+                <script src="jquery-1.11.1.min.js"></script>
+                <script src="jquery.mobile-1.4.5.min.js"></script>
+                <link rel="stylesheet" href="jw-jqm-cal.ios7.css" />
+                <script type="text/javascript" src="jw-jqm-cal.js"></script>
+                <style>
+                    .wrap {
+                        white-space: normal !important;
+                    }
+                    #header-banner{
+                        background-color:#DC143C;
+                        color:#FFFFFF;
+                    }
+                </style>
+                <script type="text/javascript">
+                    
+                    $(document).on("pageinit", "#view-calendar", function () {
+                                   var missalCalendar = {
+                                   baseUrl:"http://calapi.inadiutorium.cz/api/v0/en/calendars/general-en/",
+                                   init:function(){
+                                   var today = new Date();
+                                   this.populateReading(today);
+                                   },
+                                   capitalizeFirst: function capitalizeFirstLetter(string) {
+                                   return string.charAt(0).toUpperCase() + string.slice(1);
+                                   },
+                                   concatCelebrations:function(celebrations){
+                                   var celebTxt = "";
+                                   for(i=0; i<celebrations.length;i++){
+                                   celebTxt += celebrations[i]['title']+'<br>';
+                                   }
+                                   return celebTxt;
+                                   },
+                                   getFeastUrl: function(cal){
+                                   var url ="";
+                                   var season = cal.season;
+                                   var week = cal.season_week;
+                                   var d = cal.weekday; //day in string format e.g Wednesday
+                                   var day = this.capitalizeFirst(d);
+                                   
+                                   
+                                   var mCal = new Date(cal.date);
+                                   
+                                   var mDay = mCal.getDate(); // day in integer format e.g 2
+                                   var mMonth = mCal.getMonth()+1; // month in integer format e.g 12 (for December)
+                                   
+                                   switch (mMonth){
+                                   case 1: //January
+                                   if (mDay == 1 || mDay == 3 || mDay == 13 || mDay == 17 || mDay == 20 || mDay == 24 || mDay == 25 || mDay == 26){
+                                   url = "Jan "+mDay+".htm";
+                                   }
+                                   break;
+                                   
+                                   case 2://February
+                                   if (mDay == 2 || mDay == 22){
+                                   url = "Feb "+mDay+".htm";
+                                   }
+                                   if ( mDay == 8){
+                                   url = "February "+mDay+".htm";
+                                   }
+                                   break;
+                                   
+                                   case 3://March
+                                   if (mDay == 17 || mDay == 19 || mDay == 25){
+                                   url = "Mar "+mDay+".htm";
+                                   }
+                                   if (mDay == 23){
+                                   url = "March "+mDay+".htm";
+                                   }
+                                   break;
+                                   
+                                   case 4://April
+                                   if (mDay == 4 || mDay == 24 || mDay == 25 || mDay == 28 || mDay == 29 || mDay == 30){
+                                   url = "April "+mDay+".htm";
+                                   }
+                                   break;
+                                   
+                                   case 5://May
+                                   if (mDay == 1 || mDay == 3 || mDay == 14 || mDay == 18 || mDay == 22 || mDay == 24 || mDay == 29 || mDay == 31){
+                                   url = "May "+mDay+".htm";
+                                   }
+                                   break;
+                                   
+                                   case 6://June
+                                   if (mDay == 3 || mDay == 5 || mDay == 11 || mDay == 24 || mDay == 26 || mDay == 29){
+                                   url = "June "+mDay+".htm";
+                                   }
+                                   break;
+                                   
+                                   case 7://July
+                                   if (mDay == 3 || mDay == 22 || mDay == 25 || mDay == 26 || mDay == 29){
+                                   url = "July "+mDay+".htm";
+                                   }
+                                   break;
+                                   
+                                   case 8://August
+                                   if (mDay == 4 || mDay == 6 || mDay == 10 || mDay == 14 || mDay == 15 || mDay == 21 || mDay == 22 || mDay == 24 || mDay == 28 || mDay == 29){
+                                   url = "August "+mDay+".htm";
+                                   }
+                                   break;
+                                   
+                                   case 9://September
+                                   if (mDay == 8 || mDay == 14 || mDay == 15 || mDay == 21 || mDay == 29 || mDay == 30){
+                                   url = "Sept "+mDay+".htm";
+                                   }
+                                   break;
+                                   
+                                   case 10://October
+                                   if (mDay == 1 || mDay == 2 || mDay == 7 || mDay == 18 || mDay == 28){
+                                   url = "Oct "+mDay+".htm";
+                                   }
+                                   break;
+                                   
+                                   case 11://November
+                                   if (mDay == 1 || mDay == 2 || mDay == 4 || mDay == 9 || mDay == 18 || mDay == 21 || mDay == 24 || mDay == 30){
+                                   url = "Nov "+mDay+".htm";
+                                   }
+                                   break;
+                                   
+                                   case 12://december
+                                   if (mDay == 6 || mDay == 8 || mDay == 25 || mDay == 26 || mDay == 27 || mDay == 28 || mDay == 29 || mDay == 30 || mDay == 31){
+                                   url = "Dec "+mDay+".htm";
+                                   }
+                                   break;
+                                   
+                                   default:
+                                   url = "";
+                                   break;
+                                   
+                                   }
+                                   
+                                   
+                                   return url;
+                                   },
+                                   getReadingUrl:function(cal){
+                                   var url ="";
+                                   var season = cal.season;
+                                   var week = cal.season_week;
+                                   var d = cal.weekday; //day in string format e.g wednesday
+                                   var day = this.capitalizeFirst(d);//Force capitalise the first letter
+                                   
+                                   var mCal = new Date(cal.date);
+                                   
+                                   var mDay = mCal.getDate(); // day in integer format e.g 2
+                                   var mMonth = mCal.getMonth()+1; // month in integer format e.g 12 (for December)
+                                   
+                                   switch (season){
+                                   
+                                   case "lent":
+                                   url = "Lent "+week+" "+day+".htm";
+                                   break;
+                                   
+                                   case "easter":
+                                   if (week == 1 && day.equals("Sunday")){
+                                   url = "Easter Sunday Day.htm";
+                                   }else if (week == 1){
+                                   url = "Easter "+day+".htm";
+                                   }else{
+                                   url = "Easter "+week+" "+day+".htm";
+                                   }
+                                   break;
+                                   
+                                   case "advent":
+                                   if (mDay>=17 && mDay<=24){
+                                   url = "Advent Dec "+mDay+".htm";
+                                   }else{
+                                   url = "Advent "+week+" "+day+".htm";
+                                   }
+                                   break;
+                                   
+                                   case "christmas":
+                                   if (mDay == 25){
+                                   url = "Christmas.htm";
+                                   }else if (week == 1){
+                                   url = "Xmas "+day.substring(0, 2)+" after Ep.htm";
+                                   }else if (week == 2 && day.equals("Sunday")){
+                                   url = "Xmas 2nd Su after.htm";
+                                   }else if(mMonth == 1 && mDay <= 7){
+                                   url = "Xmas "+mDay+" Jan.htm";
+                                   }
+                                   break;
+                                   
+                                   case "ordinary":
+                                   if (week <= 34){
+                                   
+                                   url = ""+week+" "+day+".htm";
+                                   }
+                                   break;
+                                   
+                                   default:
+                                   url="";
+                                   break;
+                                   }
+                                   
+                                   return url;
+                                   },
+                                   populateReading:function(date){
+                                   var theMissalObj = this;
+                                   var dd = date.getDate();
+                                   var mm = date.getMonth()+1; //January is 0!
+                                   var yyyy = date.getFullYear();
+                                   var apiURL = this.baseUrl+"/"+yyyy+"/"+mm+"/"+dd;
+                                   $.ajax(apiURL,{
+                                          
+                                          
+                                          success: function(data) {
+                                          //alert(data);
+                                          
+                                          //console.log(theMissalObj.getReadingUrl(data));
+                                          var celebrations = data.celebrations;
+                                          var eventLink = theMissalObj.getReadingUrl(data);
+                                          var feastURL = theMissalObj.getFeastUrl(data);
+                                          console.log(eventLink);
+                                          var eventColor = 'white';
+                                          var celebrationText = 'No celebration';
+                                          if(celebrations.length>0){
+                                          eventColor = celebrations[0]['colour'];
+                                          celebrationText = theMissalObj.concatCelebrations(celebrations).length ?theMissalObj.concatCelebrations(celebrations):'No celebration';
+                                          
+                                          }
+                                          var listString = '<ul data-role="listview" data-theme="a">';
+                                          var eventHtml = '<li data-icon="false">' +
+                                          '<a href="'+eventLink+'" rel="external">' +
+                                          '<img src="'+eventColor+'.png">' +
+                                          '<h2>'+missalCalendar.capitalizeFirst(data.season)+'</h2>'+
+                                          '<h3>'+missalCalendar.capitalizeFirst(data.weekday)+' '+data.date+'</h3>' +
+                                          '<p class="wrap">'+celebrationText+'</p>' +
+                                          '<span class="ui-li-count">'+data.season_week+'</span>'+
+                                          '</a>' +
+                                          '</li>';
+                                          //var feastDividerTitle = 'No Feast Reading';
+                                          var feastDetails= '<li data-role="list-divider">No Feast Reading</li>';
+                                          
+                                          if(theMissalObj.getFeastUrl(data)!=""){
+                                          
+                                          //theMissalObj.getFeastUrl(data)
+                                          feastDetails = '<li><a href="'+theMissalObj.getFeastUrl(data)+'" rel="external">Feast Reading</a></li>'
+                                          }
+                                          var fullHTML = eventHtml+feastDetails;
+                                          var readingContainer = $("#reading-container");
+                                          readingContainer.html(fullHTML);
+                                          readingContainer.listview("refresh");
+                                          
+                                          
+                                          
+                                          },
+                                          error: function(request) {
+                                            console.log(request);
+                                          }
+                                          });
+                                   
+                                   }
+                                   };
+                                   
+                                   missalCalendar.init();
+                                   
+                                   $("#calendar").jqmCalendar({
+                                                              months : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                                                              days : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+                                                              startOfWeek : 0
+                                                              });
+                                   
+                                   $("#calendar").bind('change',function(event,date){
+                                                       missalCalendar.populateReading(date);
+                                                       
+                                                       
+                                                       });
+                                   })
+                    </script>
+                
+    </head> 
+    <body> 
+        
+        <div data-role="page" id="view-calendar" data-theme="c">
+            
+            <div data-role="header" id="header-banner">
+                <h1>Select a date</h1>
+            </div>
+            
+            <div data-role="content">
+                <div id="calendar"></div>
+                <br>
+                <br>
+                <br>
+                <ul id="reading-container" data-role="listview" data-theme="a">
+                    
+                </ul>
+            </div>
+            
+            
+            
+        </div>
+        
+    </body>
+</html>

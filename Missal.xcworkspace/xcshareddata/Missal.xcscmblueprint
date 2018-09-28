@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B3C44F612F06511902391041613090A80C3DD9B9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B3C44F612F06511902391041613090A80C3DD9B9" : 0,
+    "343FAF77BF6DA5F891ECEF799B2655CC991F8BB8" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F411AD28-01DA-4AE4-B776-819D8096CE30",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B3C44F612F06511902391041613090A80C3DD9B9" : "Missal%202\/",
+    "343FAF77BF6DA5F891ECEF799B2655CC991F8BB8" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Missal",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Missal.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/marciechiri\/faith-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "343FAF77BF6DA5F891ECEF799B2655CC991F8BB8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/lbirir\/daily-missal-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B3C44F612F06511902391041613090A80C3DD9B9"
+    }
+  ]
+}
